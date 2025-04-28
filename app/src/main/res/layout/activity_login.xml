@@ -8,7 +8,7 @@
         android:id="@+id/topBackground"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:background="@drawable/bg_top_blue" />
+        android:background="@color/FlexColor" />
 
     <!-- Logo -->
     <ImageView

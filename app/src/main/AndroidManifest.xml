@@ -12,24 +12,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlexNow"
         tools:targetApi="31">
+
+        <!-- SignUpActivity -->
         <activity
-            android:name=".login"
-            android:exported="false" />
-        <!-- VideoPlayerActivity declaration -->
+            android:name=".SignUpActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- VideoPlayerActivity -->
         <activity
             android:name=".VideoPlayerActivity"
-            android:exported="false" /> <!-- MainActivity declaration -->
+            android:exported="false" />
+
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FlexNow.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Theme.FlexNow.NoActionBar" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
