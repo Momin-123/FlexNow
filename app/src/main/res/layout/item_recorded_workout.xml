@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/workoutName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Workout Name"
+        android:textSize="18sp"
+        android:paddingTop="8dp"/>
+
+    <TextView
+        android:id="@+id/instructorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instructor Name"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/uploadDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uploaded Date"
+        android:textSize="14sp"/>
+
+</LinearLayout>
