@@ -1,9 +1,23 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_recorded_workouts"
-            android:icon="@drawable/ic_video"
-            android:title="Recorded Workouts" />
+            android:id="@+id/nav_schedule"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Schedule"
+            />
+
+        <item
+            android:id="@+id/nav_my_bookings"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="My Bookings" />
+        <item
+        android:id="@+id/nav_recorded_workouts"
+        android:icon="@drawable/ic_video"
+        android:title="Recorded Workouts" />
         <item
             android:id="@+id/nav_trainer_info"
             android:icon="@drawable/ic_trainer"

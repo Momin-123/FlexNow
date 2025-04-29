@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/classImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/yoga" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/className"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yoga"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/classTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/instructorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Instructor A"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/bookingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bookings: 5"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <!-- Cancel Booking Button -->
+        <Button
+            android:id="@+id/buttonCancelBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel Booking"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_red_light" />
+
+        <!-- Join Class Button -->
+        <Button
+            android:id="@+id/buttonJoinClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join Class"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/holo_green_light" />
+    </LinearLayout>
+
+</LinearLayout>

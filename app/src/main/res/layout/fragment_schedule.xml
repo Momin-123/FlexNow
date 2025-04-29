@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/FlexColor"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:text="Schedule For Today"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="100dp"
+        android:paddingVertical="20dp"
+        android:layout_margin="2dp"
+
+        android:textColor="@color/white"
+        >
+
+    </TextView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_weight="12"
+        android:layout_height="0dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+</LinearLayout>
+
+
+
+
+
+

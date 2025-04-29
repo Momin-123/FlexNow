@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_schedule">
 
     <fragment
         android:id="@+id/nav_home"
@@ -22,7 +22,16 @@
         android:name="com.momin.l226955.flexnow.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
-
+    <fragment
+        android:id="@+id/nav_schedule"
+        android:name="com.momin.l226955.flexnow.ui.ScheduleFragment"
+        android:label="Schedule"
+        tools:layout="@layout/fragment_schedule" />
+    <fragment
+        android:id="@+id/nav_my_bookings"
+        android:name="com.momin.l226955.flexnow.ui.MyBookingsFragment"
+        android:label="My Bookings"
+        tools:layout="@layout/fragment_my_bookings" />
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.momin.l226955.flexnow.ui.slideshow.SlideshowFragment"

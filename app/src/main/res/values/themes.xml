@@ -13,7 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
+    <style name="Theme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Set the background color for the splash screen -->
+        <item name="android:windowBackground">@color/FlexColor</item>
+    </style>
     <style name="Theme.FlexNow.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
