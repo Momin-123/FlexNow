@@ -34,7 +34,7 @@
             android:exported="true"
             android:theme="@style/Theme.FlexNow.NoActionBar" />
 
-
+        <activity android:name=".TrainerActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.Splash"

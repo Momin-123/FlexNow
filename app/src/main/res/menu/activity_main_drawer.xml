@@ -22,5 +22,6 @@
             android:id="@+id/nav_trainer_info"
             android:icon="@drawable/ic_trainer"
             android:title="Trainer Info" />
+
     </group>
 </menu>

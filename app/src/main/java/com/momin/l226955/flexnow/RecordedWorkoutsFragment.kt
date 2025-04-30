@@ -1,26 +1,14 @@
 package com.momin.l226955.flexnow
 
 import RecordedWorkout
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RecordedWorkoutsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RecordedWorkoutsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,29 +19,35 @@ class RecordedWorkoutsFragment : Fragment() {
 
         val workoutList = listOf(
             RecordedWorkout(
-                R.drawable.morningyoga,  // Thumbnail image
+                R.drawable.morningyoga,
                 "John Doe",
                 "April 20, 2025",
                 "Morning Yoga",
-                "android.resource://" + requireContext().packageName + "/" + R.raw.samplevideo // Updated to handle raw video
+                "android.resource://${requireContext().packageName}/${R.raw.samplevideo}"
             ),
             RecordedWorkout(
-                R.drawable.ic_launcher_foreground,
+                R.drawable.hiit,
                 "Jane Smith",
                 "April 21, 2025",
                 "HIIT Session",
-                "https://www.youtube.com/watch?v=YYYY" // URL for YouTube video
+                "android.resource://${requireContext().packageName}/${R.raw.samplevideo2}"
+            ),
+            RecordedWorkout(
+                R.drawable.strenght,
+                "Mike Tyson",
+                "April 22, 2025",
+                "Strength Training",
+                "android.resource://${requireContext().packageName}/${R.raw.samplevideo3}"
             )
         )
 
-        val adapter = RecordedWorkoutAdapter(workoutList)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = RecordedWorkoutAdapter(workoutList)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return inflater.inflate(R.layout.fragment_recorded_workouts, container, false)
     }
 }

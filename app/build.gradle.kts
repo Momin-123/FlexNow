@@ -55,4 +55,6 @@ dependencies {
 
 
     implementation("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer:2.19.0")
+
 }

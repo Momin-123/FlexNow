@@ -1,5 +1,6 @@
 package com.momin.l226955.flexnow
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.NavigationUI
 import com.momin.l226955.flexnow.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -35,17 +37,25 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_home,
                 R.id.nav_recorded_workouts,
-                R.id.nav_trainer_info,
                 R.id.nav_gallery,
                 R.id.nav_slideshow,
                 R.id.nav_schedule,
                 R.id.nav_my_bookings
-
-            ), drawerLayout
+            ),
+            drawerLayout
         )
 
+        navView.setNavigationItemSelectedListener { menuItem ->
+            val handled = NavigationUI.onNavDestinationSelected(menuItem, navController)
+            if (handled) {
+                drawerLayout.closeDrawers()
+            }
+            handled
+        }
+
+
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+       // navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -37,4 +37,14 @@
         android:name="com.momin.l226955.flexnow.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_trainer_info"
+        android:name="com.momin.l226955.flexnow.ui.TrainerFragment"
+        android:label="Trainer Info"
+        tools:layout="@layout/fragment_trainer" />
+
+
+
+
 </navigation>

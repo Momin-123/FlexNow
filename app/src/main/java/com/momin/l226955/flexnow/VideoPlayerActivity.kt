@@ -1,39 +1,48 @@
 package com.momin.l226955.flexnow
 
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.MediaController
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 
 class VideoPlayerActivity : AppCompatActivity() {
 
+    private lateinit var videoView: VideoView
+    private lateinit var fullscreenToggle: ImageButton
+    private var isFullscreen = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_player)
 
-        // Get reference to the VideoView
-        val videoView: VideoView = findViewById(R.id.videoView)
+        videoView = findViewById(R.id.videoView)
+        fullscreenToggle = findViewById(R.id.fullscreenToggle)
 
-        // Get the video URI string passed from the adapter or fragment
         val videoUriString = intent.getStringExtra("videoUri")
-
-        // Check if the URI string is not null
         if (videoUriString != null) {
-            // Convert the URI string back to a URI
             val videoUri = Uri.parse(videoUriString)
-
-            // Set the URI to the VideoView and start playing
+            val mediaController = MediaController(this)
+            mediaController.setAnchorView(videoView)
+            videoView.setMediaController(mediaController)
             videoView.setVideoURI(videoUri)
             videoView.start()
-
-            // Optionally, add listeners to handle video events (like when it finishes)
-            videoView.setOnCompletionListener {
-                // Handle video completion
-            }
         } else {
             Toast.makeText(this, "Video not available", Toast.LENGTH_SHORT).show()
         }
+
+        fullscreenToggle.setOnClickListener {
+            if (isFullscreen) {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                fullscreenToggle.setImageResource(R.drawable.fullscreenbutton)
+            } else {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                fullscreenToggle.setImageResource(R.drawable.fullscreenbuttonexit)
+            }
+            isFullscreen = !isFullscreen
+        }
     }
 }
-
