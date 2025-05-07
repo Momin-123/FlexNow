@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
+
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -33,6 +36,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         viewBinding = true
     }
@@ -49,12 +53,23 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+
+    implementation(libs.firebase.auth)
 
 
-    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
-    implementation ("com.google.android.exoplayer:exoplayer:2.19.0")
+    implementation(libs.exoplayer)
+    implementation (libs.exoplayer.v2190)
 
 }

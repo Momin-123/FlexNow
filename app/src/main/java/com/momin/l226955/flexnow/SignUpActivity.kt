@@ -5,83 +5,106 @@ import android.os.Bundle
 import android.text.InputType
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.momin.l226955.flexnow.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var auth: FirebaseAuth
     private var isCreatePasswordVisible = false
     private var isConfirmPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val firstNameEditText = findViewById<EditText>(R.id.firstNameEditText)
-        val lastNameEditText = findViewById<EditText>(R.id.lastNameEditText)
-        val emailEditText = findViewById<EditText>(R.id.emailEditText)
-        val usernameEditText = findViewById<EditText>(R.id.usernameEditText)
-        val createPasswordEditText = findViewById<EditText>(R.id.createPasswordEditText)
-        val confirmPasswordEditText = findViewById<EditText>(R.id.confirmPasswordEditText)
-        val ageEditText = findViewById<EditText>(R.id.ageEditText)
-        val heightEditText = findViewById<EditText>(R.id.heightEditText)
-        val weightEditText = findViewById<EditText>(R.id.weightEditText)
-        val signupButton = findViewById<Button>(R.id.signupButton)
-        val loginLink = findViewById<TextView>(R.id.loginLink)
-        val createEyeIcon = findViewById<ImageView>(R.id.createEyeIcon)
-        val confirmEyeIcon = findViewById<ImageView>(R.id.confirmEyeIcon)
+        auth = FirebaseAuth.getInstance()
 
-        createEyeIcon.setOnClickListener {
+        binding.createEyeIcon.setOnClickListener {
             isCreatePasswordVisible = !isCreatePasswordVisible
-            if (isCreatePasswordVisible) {
-                createPasswordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                createEyeIcon.setImageResource(R.drawable.eye)
-            } else {
-                createPasswordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                createEyeIcon.setImageResource(R.drawable.eyeclose)
-            }
-            createPasswordEditText.setSelection(createPasswordEditText.text.length)
+            binding.createPasswordEditText.inputType =
+                if (isCreatePasswordVisible) InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                else InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+
+            binding.createEyeIcon.setImageResource(
+                if (isCreatePasswordVisible) R.drawable.eye else R.drawable.eyeclose
+            )
+            binding.createPasswordEditText.setSelection(binding.createPasswordEditText.text.length)
         }
 
-        confirmEyeIcon.setOnClickListener {
+        binding.confirmEyeIcon.setOnClickListener {
             isConfirmPasswordVisible = !isConfirmPasswordVisible
-            if (isConfirmPasswordVisible) {
-                confirmPasswordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                confirmEyeIcon.setImageResource(R.drawable.eye)
-            } else {
-                confirmPasswordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                confirmEyeIcon.setImageResource(R.drawable.eyeclose)
-            }
-            confirmPasswordEditText.setSelection(confirmPasswordEditText.text.length)
+            binding.confirmPasswordEditText.inputType =
+                if (isConfirmPasswordVisible) InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                else InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+
+            binding.confirmEyeIcon.setImageResource(
+                if (isConfirmPasswordVisible) R.drawable.eye else R.drawable.eyeclose
+            )
+            binding.confirmPasswordEditText.setSelection(binding.confirmPasswordEditText.text.length)
         }
 
-        signupButton.setOnClickListener {
-            val firstName = firstNameEditText.text.toString()
-            val lastName = lastNameEditText.text.toString()
-            val email = emailEditText.text.toString()
-            val username = usernameEditText.text.toString()
-            val createPassword = createPasswordEditText.text.toString()
-            val confirmPassword = confirmPasswordEditText.text.toString()
-            val age = ageEditText.text.toString()
-            val height = heightEditText.text.toString()
-            val weight = weightEditText.text.toString()
+        binding.signupButton.setOnClickListener {
+            val firstName = binding.firstNameEditText.text.toString().trim()
+            val lastName = binding.lastNameEditText.text.toString().trim()
+            val email = binding.emailEditText.text.toString().trim().lowercase()
+            val username = binding.usernameEditText.text.toString().trim()
+            val password = binding.createPasswordEditText.text.toString().trim()
+            val confirmPassword = binding.confirmPasswordEditText.text.toString().trim()
+            val age = binding.ageEditText.text.toString().trim()
+            val height = binding.heightEditText.text.toString().trim()
+            val weight = binding.weightEditText.text.toString().trim()
 
-            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || username.isEmpty() ||
-                createPassword.isEmpty() || confirmPassword.isEmpty() ||
-                age.isEmpty() || height.isEmpty() || weight.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty() || username.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-            } else if (createPassword != confirmPassword) {
+            if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Signed up successfully", Toast.LENGTH_SHORT).show()
-                // Proceed to next screen if needed
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                return@setOnClickListener
             }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val userId = auth.currentUser?.uid
+                        if (userId != null) {
+                            val user = mapOf(
+                                "firstName" to firstName,
+                                "lastName" to lastName,
+                                "username" to username,
+                                "email" to email,
+                                "age" to age,
+                                "height" to height,
+                                "weight" to weight
+                            )
+                            FirebaseDatabase.getInstance().getReference("users")
+                                .child(userId)
+                                .setValue(user)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+                                        startActivity(Intent(this, LoginActivity::class.java))
+                                        finish()
+                                    } else {
+                                        Toast.makeText(this, "Error saving user data: ${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                        } else {
+                            Toast.makeText(this, "Failed to get user ID", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this, "Signup failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
-        loginLink.setOnClickListener {
-            finish() // Finish signup and return to LoginActivity
+        binding.loginLink.setOnClickListener {
+            finish()
         }
     }
 }

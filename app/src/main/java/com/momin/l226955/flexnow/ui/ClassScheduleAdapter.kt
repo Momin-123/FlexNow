@@ -4,45 +4,35 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.momin.l226955.flexnow.databinding.ItemClassScheduleBinding
-
-
 class ClassScheduleAdapter(
-    private val classList: List<ClassSchedule>,
-    private val onBookNowClick: (ClassSchedule) -> Unit
-) : RecyclerView.Adapter<ClassScheduleAdapter.ScheduleViewHolder>() {
+    private val classSchedules: List<ClassSchedule>,
+    private val onItemClick: (ClassSchedule) -> Unit
+) : RecyclerView.Adapter<ClassScheduleAdapter.ClassScheduleViewHolder>() {
 
-    inner class ScheduleViewHolder(val binding: ItemClassScheduleBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ClassScheduleViewHolder(val binding: ItemClassScheduleBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassScheduleViewHolder {
         val binding = ItemClassScheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ScheduleViewHolder(binding)
+        return ClassScheduleViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
-        val classSchedule = classList[position]
+    override fun onBindViewHolder(holder: ClassScheduleViewHolder, position: Int) {
+        val classSchedule = classSchedules[position]
         holder.binding.apply {
             imageViewClass.setImageResource(classSchedule.imageResId)
             textViewClassName.text = classSchedule.className
             textViewInstructor.text = "Instructor: ${classSchedule.instructorName}"
             textViewTime.text = "Time: ${classSchedule.time}"
-            textViewBookings.text = "Bookings: ${classSchedule.bookingsCount}"
+            textViewBookings.text = "Bookings: ${classSchedule.bookingsCount}/${classSchedule.maxCapacity}"
 
-            // Set button text and enabled/disabled state
-            if (classSchedule.isBooked) {
-                buttonBookNow.text = "Booked"
-                buttonBookNow.isEnabled = false // Disable if already booked
-            } else {
-                buttonBookNow.text = "Book Now"
-                buttonBookNow.isEnabled = true // Enable if not booked
-            }
+            buttonBookNow.text = if (classSchedule.isBooked) "Booked" else "Book Now"
+            buttonBookNow.isEnabled = !classSchedule.isBooked
 
             buttonBookNow.setOnClickListener {
-                onBookNowClick(classSchedule)
+                onItemClick(classSchedule)
             }
         }
     }
 
-    override fun getItemCount() = classList.size
+    override fun getItemCount() = classSchedules.size
 }
-
-
