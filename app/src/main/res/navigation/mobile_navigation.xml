@@ -44,7 +44,10 @@
         android:label="Trainer Info"
         tools:layout="@layout/fragment_trainer" />
 
-
-
+    <fragment
+        android:id="@+id/nav_chatbot"
+        android:name="com.momin.l226955.flexnow.ui.ChatbotFragment"
+        android:label="Chatbot"
+        tools:layout="@layout/fragment_chatbot" />
 
 </navigation>

@@ -3,7 +3,7 @@ package com.momin.l226955.flexnow
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -57,6 +57,7 @@ class SignUpActivity : AppCompatActivity() {
             val age = binding.ageEditText.text.toString().trim()
             val height = binding.heightEditText.text.toString().trim()
             val weight = binding.weightEditText.text.toString().trim()
+            val isTrainer = binding.createAsTrainerCheckBox.isChecked
 
             if (email.isEmpty() || password.isEmpty() || username.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show()
@@ -82,7 +83,9 @@ class SignUpActivity : AppCompatActivity() {
                                 "height" to height,
                                 "weight" to weight
                             )
-                            FirebaseDatabase.getInstance().getReference("users")
+
+                            val refPath = if (isTrainer) "trainers" else "users"
+                            FirebaseDatabase.getInstance().getReference(refPath)
                                 .child(userId)
                                 .setValue(user)
                                 .addOnCompleteListener {
@@ -94,6 +97,10 @@ class SignUpActivity : AppCompatActivity() {
                                         Toast.makeText(this, "Error saving user data: ${it.exception?.message}", Toast.LENGTH_SHORT).show()
                                     }
                                 }
+                                .addOnFailureListener {
+                                    Toast.makeText(this, "Write failed: ${it.message}", Toast.LENGTH_LONG).show()
+                                }
+
                         } else {
                             Toast.makeText(this, "Failed to get user ID", Toast.LENGTH_SHORT).show()
                         }

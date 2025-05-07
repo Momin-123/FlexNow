@@ -22,6 +22,11 @@
             android:id="@+id/nav_trainer_info"
             android:icon="@drawable/ic_trainer"
             android:title="Trainer Info" />
+        <item
+            android:id="@+id/nav_chatbot"
+            android:icon="@drawable/ic_chatbot"
+            android:title="Chatbot" />
+
 
     </group>
 </menu>

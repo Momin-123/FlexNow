@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/userText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#D0F0C0"
+        android:textColor="#000"
+        android:padding="10dp"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:text="User message"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/botText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#E8E8E8"
+        android:textColor="#000"
+        android:padding="10dp"
+        android:layout_gravity="start"
+        android:visibility="gone"
+        android:text="Bot message"
+        android:textSize="16sp" />
+</LinearLayout>

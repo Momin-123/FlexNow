@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/trainerDashboardLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/FlexColor"
+    android:padding="16dp">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_above="@+id/logoutButton">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Profile Picture -->
+            <ImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_launcher_foreground"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/image_background" />
+
+            <Button
+                android:id="@+id/uploadProfilePhotoButton"
+                android:layout_width="200dp"
+                android:layout_marginHorizontal="150dp"
+                android:background="@color/FlexColor"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="Upload Profile Photo"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Class Schedule Inputs -->
+            <EditText
+                android:id="@+id/classTitleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Class Title" />
+
+            <EditText
+                android:id="@+id/classDateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Date (e.g., 2025-05-08)" />
+
+            <EditText
+                android:id="@+id/classTimeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Time (e.g., 07:00 PM)" />
+
+            <EditText
+                android:id="@+id/classDurationEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Duration (e.g., 45 minutes)" />
+
+            <EditText
+                android:id="@+id/classTypeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Class Type (e.g., Yoga, HIIT)" />
+
+            <EditText
+                android:id="@+id/classCapacityEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Max Participants (e.g., 20)"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/createScheduleButton"
+                android:layout_width="200dp"
+                android:layout_marginHorizontal="100dp"
+                android:background="@color/FlexColor"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="Create Class Schedule"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Upload Class Link -->
+            <EditText
+                android:id="@+id/classLinkEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Paste Class Zoom/Meet Link" />
+
+            <Button
+                android:id="@+id/uploadLinkButton"
+                android:layout_width="200dp"
+                android:layout_marginHorizontal="100dp"
+                android:layout_height="wrap_content"
+                android:background="@color/FlexColor"
+                android:textColor="@color/white"
+                android:text="Upload Link to Booking" />
+
+            <!-- Upload Description -->
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Write  Description" />
+
+            <Button
+                android:id="@+id/uploadDescriptionButton"
+                android:layout_width="200dp"
+                android:layout_marginHorizontal="100dp"
+                android:layout_height="wrap_content"
+                android:text="Upload Description"
+                android:background="@color/FlexColor"
+                android:textColor="@color/white"
+                android:layout_marginTop="12dp" />
+            <Button
+                android:id="@+id/uploadWorkoutVideoButton"
+                android:layout_width="300dp"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_height="wrap_content"
+                android:background="@color/FlexColor"
+                android:textColor="@color/white"
+                android:text="Upload Recorded Workout Video"
+                android:layout_marginTop="12dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Logout Button Bottom Left -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/FlexColor"
+        android:textColor="@color/white"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="12dp"/>
+</RelativeLayout>
