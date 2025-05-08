@@ -37,6 +37,9 @@
             android:exported="true"
             android:theme="@style/Theme.FlexNow.NoActionBar" />
 
+        <activity android:name=".TrainerPortal">
+            <!-- Add any specific configurations for the TrainerPortalActivity here -->
+        </activity>
 
         <activity
             android:name=".SplashActivity"

@@ -153,6 +153,8 @@ class ScheduleFragment : Fragment() {
             "yoga" -> R.drawable.yoga
             "cardio" -> R.drawable.cardio
             "pilates" -> R.drawable.pilates
+            "hit" -> R.drawable.hiit
+            "strength" -> R.drawable.strenght
             else -> R.drawable.flexnow
         }
     }

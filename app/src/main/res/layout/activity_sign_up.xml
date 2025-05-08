@@ -198,6 +198,13 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="16sp" />
+            <CheckBox
+                android:id="@+id/createAsTrainerCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create account as Trainer"
+                android:layout_marginBottom="16dp"
+                />
 
             <Button
                 android:id="@+id/signupButton"

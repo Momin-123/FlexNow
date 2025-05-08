@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.momin.l226955.flexnow.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -51,10 +52,32 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        val userId = auth.currentUser?.uid
+                        if (userId != null) {
+                            // Check if user is in 'trainers' or 'users' in Realtime Database
+                            FirebaseDatabase.getInstance().getReference("trainers").child(userId).get()
+                                .addOnSuccessListener { snapshot ->
+                                    if (snapshot.exists()) {
+                                        // User is a trainer, navigate to TrainerPortal
+                                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+
+                                        val intent = Intent(this, TrainerPortal::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    } else {
+                                        // User is a regular user, navigate to MainActivity
+                                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+
+                                        val intent = Intent(this, MainActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(this, "Error checking user role", Toast.LENGTH_SHORT).show()
+                                    Log.e("FIREBASE_LOGIN", "Error: ${it.message}")
+                                }
+                        }
                     } else {
                         Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                         Log.e("FIREBASE_LOGIN", "Error: ${task.exception}")

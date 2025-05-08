@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/FlexColor"
+    android:fitsSystemWindows="true"
     android:padding="16dp">
 
     <ScrollView
@@ -42,7 +43,7 @@
 
             <!-- Class Schedule Inputs -->
             <EditText
-                android:id="@+id/classTitleEditText"
+                android:id="@+id/class_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Class Title" />
@@ -54,7 +55,7 @@
                 android:hint="Date (e.g., 2025-05-08)" />
 
             <EditText
-                android:id="@+id/classTimeEditText"
+                android:id="@+id/class_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Time (e.g., 07:00 PM)" />
@@ -66,7 +67,7 @@
                 android:hint="Duration (e.g., 45 minutes)" />
 
             <EditText
-                android:id="@+id/classTypeEditText"
+                android:id="@+id/class_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Class Type (e.g., Yoga, HIIT)" />
@@ -79,7 +80,7 @@
                 android:inputType="number" />
 
             <Button
-                android:id="@+id/createScheduleButton"
+                android:id="@+id/create_schedule_button"
                 android:layout_width="200dp"
                 android:layout_marginHorizontal="100dp"
                 android:background="@color/FlexColor"
