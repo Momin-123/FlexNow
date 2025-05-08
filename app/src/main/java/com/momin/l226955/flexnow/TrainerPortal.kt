@@ -73,14 +73,14 @@ class TrainerPortal : AppCompatActivity() {
                     return@fetchTrainerNameById
                 }
 
-                // Step 2: Search for a document in class_bookings where field instructorName == trainerName
                 db.collection("class_bookings").get()
                     .addOnSuccessListener { querySnapshot ->
                         var found = false
                         for (document in querySnapshot.documents) {
                             val docInstructorName = document.getString("instructorName")
                             if (docInstructorName == trainerName) {
-                                val updateMap = mapOf(trainerName to classLink)
+                                // Correct field name here
+                                val updateMap = mapOf("classLink" to classLink)
                                 db.collection("class_bookings").document(document.id)
                                     .set(updateMap, SetOptions.merge())
                                     .addOnSuccessListener {
@@ -101,11 +101,10 @@ class TrainerPortal : AppCompatActivity() {
                         Toast.makeText(this, "Error fetching classes: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
             }
-
-
         }
 
-            createScheduleButton.setOnClickListener {
+
+        createScheduleButton.setOnClickListener {
             val title = classTitleEditText.text.toString().trim()
             val type = classTypeEditText.text.toString().trim()
             val time = classTimeEditText.text.toString().trim()
